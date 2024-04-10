@@ -7,22 +7,22 @@ import dummy4 from '/public/4.jpg'
 
 export function Content() {
   return (
-    <section>
-      <div className="section-header">
+    <section className="absolute top-[100vh] h-[300vh] w-full bg-neutral-900 px-24 py-8">
+      <header className="section-header">
         <h1>Events</h1>
         <p>
           Lorem ipsum dolor sit amet consectetur adipisicing elit. Id non eius
           expedita laboriosam numquam earum!
         </p>
-      </div>
+      </header>
       <div className="section-images">
         <div className="row">
-          <Image src={dummy1} alt="" />
-          <Image src={dummy2} alt="" />
+          <Image src={dummy1} alt="" className="h-full w-full object-cover" />
+          <Image src={dummy2} alt="" className="h-full w-full object-cover" />
         </div>
         <div className="row">
-          <Image src={dummy3} alt="" />
-          <Image src={dummy4} alt="" />
+          <Image src={dummy3} alt="" className="h-full w-full object-cover" />
+          <Image src={dummy4} alt="" className="h-full w-full object-cover" />
         </div>
       </div>
     </section>

@@ -13,6 +13,15 @@ const config: Config = {
         'gradient-conic':
           'conic-gradient(from 180deg at 50% 50%, var(--tw-gradient-stops))',
       },
+      colors: {
+        primary: '#5546ff',
+        secondary: '#bfff00',
+      },
+      animation: {
+        'rotate-eyes': 'rotateEyes 4s infinite linear',
+        'wonder-face':
+          'wonderFace 2s infinite cubic-bezier(0.075, 0.82, 0.165, 1)',
+      },
     },
   },
   plugins: [],
