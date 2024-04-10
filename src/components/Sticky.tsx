@@ -93,7 +93,7 @@ export const Sticky: React.FC<StickyProps> = ({ stickyRef, contentRef }) => {
   return (
     <section
       ref={stickyRef}
-      className="bg-primary fixed left-0 top-0 h-screen w-screen"
+      className="fixed left-0 top-0 h-screen w-screen bg-primary"
       onMouseMove={handleMove}
       onMouseLeave={handleLeave}
     >
@@ -144,16 +144,16 @@ export const Sticky: React.FC<StickyProps> = ({ stickyRef, contentRef }) => {
               <Image
                 src={eye}
                 alt=""
-                className="animate-rotate-eyes size-[100px] object-cover"
+                className="size-[100px] animate-rotate-eyes object-cover"
               />
               <Image
                 src={eye}
                 alt=""
-                className="animate-rotate-eyes size-[100px] object-cover"
+                className="size-[100px] animate-rotate-eyes object-cover"
               />
             </div>
             <div className="mouth-wrapper flex flex-1 items-start justify-center">
-              <div className="mouth animate-wonder-face size-[40px] rounded-[50px] bg-black"></div>
+              <div className="mouth size-[40px] animate-wonder-face rounded-[50px] bg-black"></div>
             </div>
           </div>
         </div>
