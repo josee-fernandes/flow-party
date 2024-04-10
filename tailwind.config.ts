@@ -18,9 +18,9 @@ const config: Config = {
         secondary: '#bfff00',
       },
       animation: {
-        'rotate-eyes': 'rotateEyes 4s infinite linear',
+        'rotate-eyes': 'rotateEyes 10s infinite linear',
         'wonder-face':
-          'wonderFace 2s infinite cubic-bezier(0.075, 0.82, 0.165, 1)',
+          'wonderFace 4s infinite cubic-bezier(0.075, 0.82, 0.165, 1)',
       },
       keyframes: {
         rotateEyes: {
