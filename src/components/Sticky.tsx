@@ -43,16 +43,16 @@ export function Sticky() {
               <Image
                 src={eye}
                 alt=""
-                className="animation-rotate-eyes size-[100px] object-cover"
+                className="animate-rotate-eyes size-[100px] object-cover"
               />
               <Image
                 src={eye}
                 alt=""
-                className="animation-rotate-eyes size-[100px] object-cover"
+                className="animate-rotate-eyes size-[100px] object-cover"
               />
             </div>
             <div className="mouth-wrapper flex flex-1 items-start justify-center">
-              <div className="mouth animation-wonder-face size-[40px] rounded-[50px] bg-black"></div>
+              <div className="mouth animate-wonder-face size-[40px] rounded-[50px] bg-black"></div>
             </div>
           </div>
         </div>
