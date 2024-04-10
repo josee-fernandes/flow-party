@@ -80,9 +80,9 @@ export const Sticky: React.FC<StickyProps> = ({ stickyRef, contentRef }) => {
             immediateRender: false,
             invalidateOnRefresh: true,
           },
-          y: 250,
-          scale: 0.75,
-          rotation: -15,
+          y: 200,
+          scale: 0.5,
+          rotation: -10,
           ease: 'power3.out',
         })
       }
