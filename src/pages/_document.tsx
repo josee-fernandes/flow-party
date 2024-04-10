@@ -15,7 +15,7 @@ function Document() {
           rel="stylesheet"
         />
       </Head>
-      <body className="h-full w-full bg-black font-['Schibsted_Grotesk',_sans-serif]">
+      <body className="h-full w-full overflow-x-hidden bg-black font-['Schibsted_Grotesk',_sans-serif]">
         <Main />
         <NextScript />
       </body>

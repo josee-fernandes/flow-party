@@ -97,9 +97,15 @@ export const Sticky: React.FC<StickyProps> = ({ stickyRef, contentRef }) => {
     >
       <nav className="absolute top-0 flex w-full items-center justify-between p-8">
         <div className="logo">
-          <a
+          {/* <a
             href="#"
             className="text-secondary font-[Humane,_sans-serif] text-6xl uppercase [text-decoration:none]"
+          >
+            Outflow
+          </a> */}
+          <a
+            href="#"
+            className="font-[Humane,_sans-serif] text-6xl uppercase text-white mix-blend-difference [text-decoration:none]"
           >
             Outflow
           </a>
@@ -121,14 +127,14 @@ export const Sticky: React.FC<StickyProps> = ({ stickyRef, contentRef }) => {
       </nav>
 
       <header className="absolute left-1/2 top-[55%] -translate-x-1/2 -translate-y-1/2">
-        <h1 className="font-[Humane,_sans-serif] text-[45vw] font-normal uppercase leading-[100%] text-white">
+        <h1 className="pointer-events-none font-[Humane,_sans-serif] text-[45vw] font-normal uppercase leading-[70%] text-white">
           Outflow
         </h1>
       </header>
 
       <div
         ref={trackerRef}
-        className="tracker absolute left-1/2 top-1/2 h-[75%] w-[75%] -translate-x-1/2 -translate-y-1/2 px-8 py-0"
+        className="tracker pointer-events-none absolute left-1/2 top-1/2 h-[75%] w-[75%] -translate-x-1/2 -translate-y-1/2 px-8 py-0"
       >
         <div
           ref={emojiRef}
