@@ -1,3 +1,6 @@
+import { useGSAP } from '@gsap/react'
+import { gsap } from 'gsap'
+import ScrollTrigger from 'gsap/dist/ScrollTrigger'
 import Image from 'next/image'
 import { RefObject } from 'react'
 
@@ -6,11 +9,45 @@ import dummy2 from '/public/2.png'
 import dummy3 from '/public/3.jpg'
 import dummy4 from '/public/4.jpg'
 
+gsap.registerPlugin(useGSAP)
+gsap.registerPlugin(ScrollTrigger)
+
 interface ContentProps {
   contentRef: RefObject<HTMLDivElement>
+  stickyRef: RefObject<HTMLDivElement>
 }
 
-export const Content: React.FC<ContentProps> = ({ contentRef }) => {
+export const Content: React.FC<ContentProps> = ({ contentRef, stickyRef }) => {
+  useGSAP(
+    () => {
+      if (contentRef.current && contentRef.current) {
+        gsap.set(contentRef.current, {
+          y: 0,
+          scale: 0.75,
+          rotation: 5,
+        })
+
+        gsap.to(contentRef.current, {
+          scrollTrigger: {
+            trigger: stickyRef.current,
+            start: 'end end',
+            end: () =>
+              `+=${window.innerHeight + stickyRef.current!.offsetHeight * 0.5}`,
+            scrub: 1,
+            pin: true,
+            immediateRender: false,
+            invalidateOnRefresh: true,
+          },
+          y: 100,
+          scale: 1,
+          rotation: 0,
+          ease: 'power3.out',
+        })
+      }
+    },
+    { dependencies: [stickyRef, contentRef] },
+  )
+
   return (
     <section
       ref={contentRef}

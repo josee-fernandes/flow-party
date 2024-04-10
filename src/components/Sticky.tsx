@@ -75,8 +75,10 @@ export const Sticky: React.FC<StickyProps> = ({ stickyRef, contentRef }) => {
             start: 'top top',
             end: () =>
               `+=${window.innerHeight + contentRef.current!.offsetHeight * 0.5}`,
-            scrub: 1,
+            scrub: 1.5,
             pin: true,
+            immediateRender: false,
+            invalidateOnRefresh: true,
           },
           y: 250,
           scale: 0.75,
@@ -97,12 +99,6 @@ export const Sticky: React.FC<StickyProps> = ({ stickyRef, contentRef }) => {
     >
       <nav className="absolute top-0 flex w-full items-center justify-between p-8">
         <div className="logo">
-          {/* <a
-            href="#"
-            className="text-secondary font-[Humane,_sans-serif] text-6xl uppercase [text-decoration:none]"
-          >
-            Outflow
-          </a> */}
           <a
             href="#"
             className="font-[Humane,_sans-serif] text-6xl uppercase text-white mix-blend-difference [text-decoration:none]"

@@ -10,7 +10,7 @@ function Home() {
   return (
     <div>
       <Sticky stickyRef={stickyRef} contentRef={contentRef} />
-      <Content contentRef={contentRef} />
+      <Content contentRef={contentRef} stickyRef={stickyRef} />
     </div>
   )
 }
