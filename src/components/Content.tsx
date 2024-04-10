@@ -8,22 +8,36 @@ import dummy4 from '/public/4.jpg'
 export function Content() {
   return (
     <section className="absolute top-[100vh] h-[300vh] w-full bg-neutral-900 px-24 py-8">
-      <header className="section-header">
-        <h1>Events</h1>
-        <p>
+      <header className="section-header mb-8 flex w-full justify-between">
+        <h1 className="text-normal font-[Humane] text-[10vw] uppercase leading-[100%] text-white">
+          Events
+        </h1>
+        <p className="w-1/4 text-right text-xs uppercase text-white">
           Lorem ipsum dolor sit amet consectetur adipisicing elit. Id non eius
           expedita laboriosam numquam earum!
         </p>
       </header>
-      <div className="section-images">
-        <div className="row">
-          <Image src={dummy1} alt="" className="h-full w-full object-cover" />
-          <Image src={dummy2} alt="" className="h-full w-full object-cover" />
-        </div>
-        <div className="row">
-          <Image src={dummy3} alt="" className="h-full w-full object-cover" />
-          <Image src={dummy4} alt="" className="h-full w-full object-cover" />
-        </div>
+      <div className="section-images mx-8 my-0 grid grid-cols-2 gap-8">
+        <Image
+          src={dummy1}
+          alt=""
+          className="h-[600px] w-full flex-1 object-cover"
+        />
+        <Image
+          src={dummy2}
+          alt=""
+          className="h-[600px] w-full flex-1 object-cover"
+        />
+        <Image
+          src={dummy3}
+          alt=""
+          className="h-[600px] w-full flex-1 object-cover"
+        />
+        <Image
+          src={dummy4}
+          alt=""
+          className="h-[600px] w-full flex-1 object-cover"
+        />
       </div>
     </section>
   )
