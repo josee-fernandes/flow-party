@@ -1,13 +1,21 @@
 import Image from 'next/image'
+import { RefObject } from 'react'
 
 import dummy1 from '/public/1.jpg'
 import dummy2 from '/public/2.png'
 import dummy3 from '/public/3.jpg'
 import dummy4 from '/public/4.jpg'
 
-export function Content() {
+interface ContentProps {
+  contentRef: RefObject<HTMLDivElement>
+}
+
+export const Content: React.FC<ContentProps> = ({ contentRef }) => {
   return (
-    <section className="absolute top-[100vh] h-[300vh] w-full bg-neutral-900 px-24 py-8">
+    <section
+      ref={contentRef}
+      className="content absolute top-[100vh] h-[300vh] w-full bg-neutral-900 px-24 py-8"
+    >
       <header className="section-header mb-8 flex w-full justify-between">
         <h1 className="text-normal font-[Humane] text-[10vw] uppercase leading-[100%] text-white">
           Events

@@ -1,10 +1,100 @@
+import { useGSAP } from '@gsap/react'
+import gsap from 'gsap'
+import ScrollTrigger from 'gsap/dist/ScrollTrigger'
 import Image from 'next/image'
+import { RefObject, useRef } from 'react'
 
 import eye from '/public/eye.svg'
 
-export function Sticky() {
+gsap.registerPlugin(useGSAP)
+gsap.registerPlugin(ScrollTrigger)
+
+interface StickyProps {
+  stickyRef: RefObject<HTMLDivElement>
+  contentRef: RefObject<HTMLDivElement>
+}
+
+export const Sticky: React.FC<StickyProps> = ({ stickyRef, contentRef }) => {
+  const trackerRef = useRef<HTMLDivElement>(null)
+  const emojiRef = useRef<HTMLDivElement>(null)
+  const emojiFaceRef = useRef<HTMLDivElement>(null)
+
+  const { contextSafe } = useGSAP()
+
+  const handleMove = contextSafe(
+    (event: React.MouseEvent<HTMLElement, MouseEvent>) => {
+      if (trackerRef.current) {
+        const trackerRect = trackerRef.current.getBoundingClientRect()
+        const relX = event.clientX - (trackerRect.left + trackerRect.width / 2)
+        const relY = event.clientY - (trackerRect.top + trackerRect.height / 2)
+
+        const emojiMaxDisplacement = 50
+        const emojiFaceMaxDisplacement = 75
+
+        const emojiDisplacementX =
+          (relX / trackerRect.width) * emojiMaxDisplacement
+        const emojiDisplacementY =
+          (relY / trackerRect.height) * emojiMaxDisplacement
+        const emojiFaceDisplacementX =
+          (relX / trackerRect.width) * emojiFaceMaxDisplacement
+        const emojiFaceDisplacementY =
+          (relY / trackerRect.height) * emojiFaceMaxDisplacement
+
+        gsap.to(emojiRef.current, {
+          x: emojiDisplacementX,
+          y: emojiDisplacementY,
+          ease: 'power3.out',
+          duration: 0.35,
+        })
+
+        gsap.to(emojiFaceRef.current, {
+          x: emojiFaceDisplacementX,
+          y: emojiFaceDisplacementY,
+          ease: 'power3.out',
+          duration: 0.35,
+        })
+      }
+    },
+  )
+
+  const handleLeave = contextSafe(() => {
+    gsap.to([emojiRef.current, emojiFaceRef.current], {
+      x: 0,
+      y: 0,
+      ease: 'power3.out',
+      duration: 1,
+    })
+  })
+
+  useGSAP(
+    () => {
+      if (stickyRef.current && contentRef.current) {
+        gsap.to(stickyRef.current, {
+          scrollTrigger: {
+            trigger: stickyRef.current,
+            start: 'top top',
+            end: () =>
+              `+=${window.innerHeight + contentRef.current!.offsetHeight * 0.5}`,
+            scrub: 1,
+            pin: true,
+          },
+          y: 250,
+          scale: 0.75,
+          rotation: -15,
+          ease: 'power3.out',
+        })
+      }
+    },
+    { dependencies: [stickyRef, contentRef] },
+  )
+
   return (
-    <section className="bg-primary fixed left-0 top-0 h-screen w-screen">
+    <section
+      ref={stickyRef}
+      className="bg-primary fixed left-0 top-0 h-screen w-screen"
+      onMouseMove={handleMove}
+      onMouseLeave={handleLeave}
+    >
       <nav className="absolute top-0 flex w-full items-center justify-between p-8">
         <div className="logo">
           <a
@@ -36,9 +126,18 @@ export function Sticky() {
         </h1>
       </header>
 
-      <div className="tracker absolute left-1/2 top-1/2 h-[75%] w-[75%] -translate-x-1/2 -translate-y-1/2 px-8 py-0">
-        <div className="emoji emoji-bg absolute left-1/2 top-1/2 size-[350px] -translate-x-1/2 -translate-y-1/2 rounded-[100%]">
-          <div className="emoji-face absolute left-1/2 top-1/2 flex h-[200px] w-[225px] -translate-x-1/2 -translate-y-1/2 flex-col">
+      <div
+        ref={trackerRef}
+        className="tracker absolute left-1/2 top-1/2 h-[75%] w-[75%] -translate-x-1/2 -translate-y-1/2 px-8 py-0"
+      >
+        <div
+          ref={emojiRef}
+          className="emoji emoji-bg absolute left-1/2 top-1/2 size-[350px] -translate-x-1/2 -translate-y-1/2 rounded-[100%]"
+        >
+          <div
+            ref={emojiFaceRef}
+            className="emoji-face absolute left-1/2 top-1/2 flex h-[200px] w-[225px] -translate-x-1/2 -translate-y-1/2 flex-col"
+          >
             <div className="eyes flex flex-1 justify-between">
               <Image
                 src={eye}
