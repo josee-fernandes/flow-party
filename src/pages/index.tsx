@@ -1,6 +1,7 @@
 import { useGSAP } from '@gsap/react'
 import { gsap } from 'gsap'
 import ScrollTrigger from 'gsap/dist/ScrollTrigger'
+import Head from 'next/head'
 import { useRef } from 'react'
 
 import { Content } from '@/components/Content'
@@ -68,11 +69,16 @@ function Home() {
   )
 
   return (
-    <div className="main-container">
-      <Nav />
-      <Sticky stickyRef={stickyRef} contentRef={contentRef} />
-      <Content contentRef={contentRef} stickyRef={stickyRef} />
-    </div>
+    <>
+      <Head>
+        <title>Outflow</title>
+      </Head>
+      <div className="main-container">
+        <Nav />
+        <Sticky stickyRef={stickyRef} contentRef={contentRef} />
+        <Content contentRef={contentRef} stickyRef={stickyRef} />
+      </div>
+    </>
   )
 }
 
