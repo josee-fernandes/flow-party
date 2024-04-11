@@ -17,21 +17,6 @@ interface ContentProps {
 gsap.registerPlugin(useGSAP)
 gsap.registerPlugin(ScrollTrigger)
 
-// scrollTrigger: {
-//   trigger: stickyRef.current,
-//   start: 'top top',
-//   end: () =>
-//     `+=${window.innerHeight + contentRef.current!.offsetHeight * 0.5}`,
-//   scrub: 1.5,
-//   pin: true,
-//   immediateRender: false,
-//   invalidateOnRefresh: true,
-// },
-// y: 200,
-// scale: 0.5,
-// rotation: -10,
-// ease: 'power3.out',
-
 export const Content: React.FC<ContentProps> = ({ contentRef, stickyRef }) => {
   const eventsRef = useRef<HTMLDivElement>(null)
 
@@ -69,7 +54,7 @@ export const Content: React.FC<ContentProps> = ({ contentRef, stickyRef }) => {
       className="absolute top-[100vh] h-[300vh] w-full bg-neutral-900 py-8"
     >
       <header className="section-header mb-8 flex w-full justify-between px-8">
-        <h1 className="text-normal font-[Humane] text-[10vw] font-bold uppercase leading-[100%] text-white">
+        <h1 className="text-normal font-humane text-[10vw] font-bold uppercase leading-[100%] text-white">
           Events
         </h1>
         <p className="w-1/4 text-right text-xs uppercase text-white">

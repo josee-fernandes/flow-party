@@ -72,7 +72,7 @@ export const Sticky: React.FC<StickyProps> = ({ stickyRef }) => {
       onMouseLeave={handleLeave}
     >
       <header className="absolute left-1/2 top-[55%] -translate-x-1/2 -translate-y-1/2">
-        <h1 className="pointer-events-none font-[Humane] text-[45vw] font-bold uppercase leading-[70%] text-white">
+        <h1 className="pointer-events-none font-humane text-[45vw] font-bold uppercase leading-[70%] text-white">
           Outflow
         </h1>
       </header>

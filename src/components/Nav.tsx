@@ -6,7 +6,7 @@ export const Nav: React.FC = () => {
       <div className="logo">
         <Link
           href="#"
-          className="font-[Humane,_sans-serif] text-7xl uppercase text-white mix-blend-difference [text-decoration:none]"
+          className="font-humane text-7xl uppercase text-white mix-blend-difference [text-decoration:none]"
         >
           OUTFLOW
         </Link>
