@@ -68,7 +68,7 @@ function Home() {
   )
 
   return (
-    <div>
+    <div className="main-container">
       <Nav />
       <Sticky stickyRef={stickyRef} contentRef={contentRef} />
       <Content contentRef={contentRef} stickyRef={stickyRef} />
