@@ -1,9 +1,9 @@
 import { Head, Html, Main, NextScript } from 'next/document'
 import path from 'path'
 
-const humaneFont = path.join(process.cwd(), 'public', 'Humane.ttf')
-const humaneBoldFont = path.join(process.cwd(), 'public', 'Humane_Bold.ttf')
-const swansea = path.join(process.cwd(), 'public', 'Swansea.ttf')
+const humaneFont = path.join(process.cwd(), 'public', 'humane.ttf')
+const humaneBoldFont = path.join(process.cwd(), 'public', 'humane_bold.ttf')
+const swansea = path.join(process.cwd(), 'public', 'swansea.ttf')
 
 function Document() {
   return (
