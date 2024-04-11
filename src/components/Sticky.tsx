@@ -1,20 +1,18 @@
 import { useGSAP } from '@gsap/react'
-import gsap from 'gsap'
-import ScrollTrigger from 'gsap/dist/ScrollTrigger'
+import { gsap } from 'gsap'
 import Image from 'next/image'
 import { RefObject, useRef } from 'react'
 
 import eye from '/public/eye.svg'
 
 gsap.registerPlugin(useGSAP)
-gsap.registerPlugin(ScrollTrigger)
 
 interface StickyProps {
   stickyRef: RefObject<HTMLDivElement>
   contentRef: RefObject<HTMLDivElement>
 }
 
-export const Sticky: React.FC<StickyProps> = ({ stickyRef, contentRef }) => {
+export const Sticky: React.FC<StickyProps> = ({ stickyRef }) => {
   const trackerRef = useRef<HTMLDivElement>(null)
   const emojiRef = useRef<HTMLDivElement>(null)
   const emojiFaceRef = useRef<HTMLDivElement>(null)
@@ -65,30 +63,6 @@ export const Sticky: React.FC<StickyProps> = ({ stickyRef, contentRef }) => {
       duration: 1,
     })
   })
-
-  useGSAP(
-    () => {
-      if (stickyRef.current && contentRef.current) {
-        gsap.to(stickyRef.current, {
-          scrollTrigger: {
-            trigger: stickyRef.current,
-            start: 'top top',
-            end: () =>
-              `+=${window.innerHeight + contentRef.current!.offsetHeight * 0.5}`,
-            scrub: 1.5,
-            pin: true,
-            immediateRender: false,
-            invalidateOnRefresh: true,
-          },
-          y: 200,
-          scale: 0.5,
-          rotation: -10,
-          ease: 'power3.out',
-        })
-      }
-    },
-    { dependencies: [stickyRef, contentRef] },
-  )
 
   return (
     <section
