@@ -18,7 +18,7 @@ export const Content: React.FC<ContentProps> = ({ contentRef }) => {
       className="content absolute top-[100vh] h-[300vh] w-full bg-neutral-900 px-24 py-8"
     >
       <header className="section-header mb-8 flex w-full justify-between">
-        <h1 className="text-normal font-[Humane] text-[10vw] uppercase leading-[100%] text-white">
+        <h1 className="text-normal font-[Humane] text-[10vw] font-bold uppercase leading-[100%] text-white">
           Events
         </h1>
         <p className="w-1/4 text-right text-xs uppercase text-white">

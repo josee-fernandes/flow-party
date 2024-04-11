@@ -71,33 +71,8 @@ export const Sticky: React.FC<StickyProps> = ({ stickyRef }) => {
       onMouseMove={handleMove}
       onMouseLeave={handleLeave}
     >
-      <nav className="absolute top-0 flex w-full items-center justify-between p-8">
-        <div className="logo">
-          <a
-            href="#"
-            className="font-[Humane,_sans-serif] text-6xl uppercase text-white mix-blend-difference [text-decoration:none]"
-          >
-            Outflow
-          </a>
-        </div>
-        <div className="links flex items-center gap-4">
-          <a
-            href="#"
-            className="rounded-[20px] border-[1px] border-white px-2 py-4 text-xs uppercase text-white [text-decoration:none]"
-          >
-            Join Community
-          </a>
-          <a
-            href="#"
-            className="rounded-[20px] border-[1px] border-white px-2 py-4 text-xs uppercase text-white [text-decoration:none]"
-          >
-            Enroll Now
-          </a>
-        </div>
-      </nav>
-
       <header className="absolute left-1/2 top-[55%] -translate-x-1/2 -translate-y-1/2">
-        <h1 className="pointer-events-none font-[Humane,_sans-serif] text-[45vw] font-normal uppercase leading-[70%] text-white">
+        <h1 className="pointer-events-none font-[Humane] text-[45vw] font-bold uppercase leading-[70%] text-white">
           Outflow
         </h1>
       </header>

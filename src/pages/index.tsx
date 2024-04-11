@@ -4,6 +4,7 @@ import ScrollTrigger from 'gsap/dist/ScrollTrigger'
 import { useRef } from 'react'
 
 import { Content } from '@/components/Content'
+import { Nav } from '@/components/Nav'
 import { Sticky } from '@/components/Sticky'
 
 gsap.registerPlugin(useGSAP)
@@ -68,6 +69,7 @@ function Home() {
 
   return (
     <div>
+      <Nav />
       <Sticky stickyRef={stickyRef} contentRef={contentRef} />
       <Content contentRef={contentRef} stickyRef={stickyRef} />
     </div>

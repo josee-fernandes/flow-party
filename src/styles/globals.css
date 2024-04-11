@@ -3,10 +3,23 @@
 @tailwind utilities;
 
 @font-face {
-  font-family: "Humane"; /*Can be any text*/
+  font-family: "Humane";
   src:
     local("Humane"),
     url("/public/Humane.ttf") format("truetype");
+}
+@font-face {
+  font-family: "Humane";
+  src:
+    local("Humane Bold"),
+    url("/public/Humane_Bold.ttf") format("truetype");
+  font-weight: 700;
+}
+@font-face {
+  font-family: "Swansea";
+  src:
+    local("Swansea"),
+    url("/public/Swansea.ttf") format("truetype");
 }
 
 .emoji-bg {
