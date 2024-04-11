@@ -1,5 +1,8 @@
+import { useGSAP } from '@gsap/react'
+import { gsap } from 'gsap'
+import ScrollTrigger from 'gsap/dist/ScrollTrigger'
 import Image from 'next/image'
-import { RefObject } from 'react'
+import { RefObject, useRef } from 'react'
 
 import dummy1 from '/public/1.jpg'
 import dummy2 from '/public/2.png'
@@ -11,13 +14,61 @@ interface ContentProps {
   stickyRef: RefObject<HTMLDivElement>
 }
 
-export const Content: React.FC<ContentProps> = ({ contentRef }) => {
+gsap.registerPlugin(useGSAP)
+gsap.registerPlugin(ScrollTrigger)
+
+// scrollTrigger: {
+//   trigger: stickyRef.current,
+//   start: 'top top',
+//   end: () =>
+//     `+=${window.innerHeight + contentRef.current!.offsetHeight * 0.5}`,
+//   scrub: 1.5,
+//   pin: true,
+//   immediateRender: false,
+//   invalidateOnRefresh: true,
+// },
+// y: 200,
+// scale: 0.5,
+// rotation: -10,
+// ease: 'power3.out',
+
+export const Content: React.FC<ContentProps> = ({ contentRef, stickyRef }) => {
+  const eventsRef = useRef<HTMLDivElement>(null)
+
+  useGSAP(
+    () => {
+      if (eventsRef.current) {
+        gsap.set('.event-image', {
+          y: 300,
+        })
+
+        gsap.to('.event-image', {
+          scrollTrigger: {
+            trigger: stickyRef.current,
+            start: 'bottom bottom',
+            end: () =>
+              `+=${window.innerHeight + stickyRef.current!.offsetHeight * 0.4}`,
+            scrub: 2,
+            immediateRender: false,
+            invalidateOnRefresh: false,
+          },
+          y: 0,
+          ease: 'power3.inOut',
+          stagger: {
+            each: 0.05,
+          },
+        })
+      }
+    },
+    { dependencies: [eventsRef], scope: eventsRef },
+  )
+
   return (
     <section
       ref={contentRef}
-      className="content absolute top-[100vh] h-[300vh] w-full bg-neutral-900 px-24 py-8"
+      className="absolute top-[100vh] h-[300vh] w-full bg-neutral-900 py-8"
     >
-      <header className="section-header mb-8 flex w-full justify-between">
+      <header className="section-header mb-8 flex w-full justify-between px-8">
         <h1 className="text-normal font-[Humane] text-[10vw] font-bold uppercase leading-[100%] text-white">
           Events
         </h1>
@@ -26,27 +77,37 @@ export const Content: React.FC<ContentProps> = ({ contentRef }) => {
           expedita laboriosam numquam earum!
         </p>
       </header>
-      <div className="section-images mx-8 my-0 grid grid-cols-2 gap-8">
-        <Image
-          src={dummy1}
-          alt=""
-          className="h-[600px] w-full flex-1 object-cover"
-        />
-        <Image
-          src={dummy2}
-          alt=""
-          className="h-[600px] w-full flex-1 object-cover"
-        />
-        <Image
-          src={dummy3}
-          alt=""
-          className="h-[600px] w-full flex-1 object-cover"
-        />
-        <Image
-          src={dummy4}
-          alt=""
-          className="h-[600px] w-full flex-1 object-cover"
-        />
+      <div className="h-[46rem]">
+        <div ref={eventsRef} className="events my-0 flex h-full w-full">
+          <div className="event-image h-full w-1/4 flex-1 overflow-hidden">
+            <Image
+              src={dummy1}
+              alt=""
+              className="h-full scale-125 object-cover transition-all duration-1000 hover:scale-100"
+            />
+          </div>
+          <div className="event-image h-full w-1/4 flex-1 overflow-hidden">
+            <Image
+              src={dummy2}
+              alt=""
+              className="h-full scale-125 object-cover transition-all duration-1000 hover:scale-100"
+            />
+          </div>
+          <div className="event-image h-full w-1/4 flex-1 overflow-hidden">
+            <Image
+              src={dummy3}
+              alt=""
+              className="h-full scale-125 object-cover transition-all duration-1000 hover:scale-100"
+            />
+          </div>
+          <div className="event-image h-full w-1/4 flex-1 overflow-hidden">
+            <Image
+              src={dummy4}
+              alt=""
+              className="h-full scale-125 object-cover transition-all duration-1000 hover:scale-100"
+            />
+          </div>
+        </div>
       </div>
     </section>
   )
