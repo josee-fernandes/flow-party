@@ -26,8 +26,8 @@ export const Sticky: React.FC<StickyProps> = ({ stickyRef }) => {
         const relX = event.clientX - (trackerRect.left + trackerRect.width / 2)
         const relY = event.clientY - (trackerRect.top + trackerRect.height / 2)
 
-        const emojiMaxDisplacement = 50
-        const emojiFaceMaxDisplacement = 75
+        const emojiMaxDisplacement = 100
+        const emojiFaceMaxDisplacement = 140
 
         const emojiDisplacementX =
           (relX / trackerRect.width) * emojiMaxDisplacement
@@ -83,22 +83,22 @@ export const Sticky: React.FC<StickyProps> = ({ stickyRef }) => {
       >
         <div
           ref={emojiRef}
-          className="emoji emoji-bg absolute left-1/2 top-1/2 size-[350px] -translate-x-1/2 -translate-y-1/2 rounded-[100%]"
+          className="emoji emoji-bg absolute left-1/2 top-1/2 size-[350px] -translate-x-1/2 -translate-y-1/2 overflow-hidden rounded-[100%]"
         >
           <div
             ref={emojiFaceRef}
-            className="emoji-face absolute left-1/2 top-1/2 flex h-[200px] w-[225px] -translate-x-1/2 -translate-y-1/2 flex-col"
+            className="emoji-face absolute left-1/2 top-1/2 flex h-[180px] w-[225px] -translate-x-1/2 -translate-y-1/2 flex-col"
           >
-            <div className="eyes flex flex-1 justify-between">
+            <div className="eyes flex flex-1 justify-center gap-12">
               <Image
                 src={eye}
                 alt=""
-                className="size-[100px] animate-rotate-eyes object-cover"
+                className="size-[65px] animate-rotate-eyes object-cover"
               />
               <Image
                 src={eye}
                 alt=""
-                className="size-[100px] animate-rotate-eyes object-cover"
+                className="size-[65px] animate-rotate-eyes object-cover"
               />
             </div>
             <div className="mouth-wrapper flex flex-1 items-start justify-center">
