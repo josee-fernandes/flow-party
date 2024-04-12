@@ -3,7 +3,12 @@ import { Head, Html, Main, NextScript } from 'next/document'
 function Document() {
   return (
     <Html lang="en">
-      <Head />
+      <Head>
+        <meta
+          name="description"
+          content="Flow Party website animation exercise"
+        />
+      </Head>
       <body>
         <Main />
         <NextScript />

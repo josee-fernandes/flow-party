@@ -8,7 +8,7 @@ export const Nav: React.FC = () => {
           href="#"
           className="font-humane text-7xl uppercase text-white mix-blend-difference [text-decoration:none]"
         >
-          OUTFLOW
+          FLOW
         </Link>
       </div>
       <div className="links flex items-center gap-4">

@@ -80,7 +80,7 @@ function Home() {
   return (
     <>
       <Head>
-        <title>Outflow</title>
+        <title>Flow</title>
       </Head>
       <div className="main-container">
         <Nav />
