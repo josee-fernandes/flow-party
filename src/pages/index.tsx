@@ -18,22 +18,30 @@ function Home() {
   useGSAP(
     () => {
       if (!!stickyRef.current && !!contentRef.current) {
-        gsap.to(stickyRef.current, {
-          scrollTrigger: {
-            trigger: stickyRef.current,
-            start: 'top top',
-            end: () =>
-              `+=${window.innerHeight + contentRef.current!.offsetHeight * 0.5}`,
-            scrub: 1.5,
-            pin: true,
-            immediateRender: false,
-            invalidateOnRefresh: true,
+        gsap.fromTo(
+          stickyRef.current,
+          {
+            y: 0.5,
+            scale: 1,
+            rotation: 0,
           },
-          y: 200,
-          scale: 0.5,
-          rotation: -10,
-          ease: 'power3.out',
-        })
+          {
+            scrollTrigger: {
+              trigger: stickyRef.current,
+              start: 'top top',
+              end: () =>
+                `+=${window.innerHeight + contentRef.current!.offsetHeight * 0.5}`,
+              scrub: 1.5,
+              pin: true,
+              immediateRender: false,
+              invalidateOnRefresh: true,
+            },
+            y: 250,
+            scale: 0.7,
+            rotation: -10,
+            ease: 'power3.inOut',
+          },
+        )
       }
     },
     { dependencies: [stickyRef, contentRef], scope: stickyRef },
@@ -41,28 +49,29 @@ function Home() {
   useGSAP(
     () => {
       if (!!stickyRef.current && !!contentRef.current) {
-        gsap.set(contentRef.current, {
-          y: 0,
-          scale: 0.75,
-          rotation: 5,
-        })
-
-        gsap.to(contentRef.current, {
-          scrollTrigger: {
-            trigger: stickyRef.current,
-            start: 'bottom bottom',
-            end: () =>
-              `+=${window.innerHeight + stickyRef.current!.offsetHeight * 0.5}`,
-            scrub: 1.5,
-            pin: true,
-            immediateRender: false,
-            invalidateOnRefresh: true,
+        gsap.fromTo(
+          contentRef.current,
+          {
+            y: 300,
+            scale: 0.75,
+            rotation: 5,
           },
-          y: 100,
-          scale: 1,
-          rotation: 0,
-          ease: 'power3.out',
-        })
+          {
+            scrollTrigger: {
+              trigger: contentRef.current,
+              start: 'top bottom',
+              end: () =>
+                `+=${window.innerHeight + stickyRef.current!.offsetHeight * 0.5}`,
+              scrub: 1.5,
+              immediateRender: false,
+              invalidateOnRefresh: true,
+            },
+            y: 300,
+            scale: 1,
+            rotation: 0,
+            ease: 'power3.inOut',
+          },
+        )
       }
     },
     { dependencies: [stickyRef, contentRef], scope: contentRef },

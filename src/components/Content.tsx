@@ -17,32 +17,32 @@ interface ContentProps {
 gsap.registerPlugin(useGSAP)
 gsap.registerPlugin(ScrollTrigger)
 
-export const Content: React.FC<ContentProps> = ({ contentRef, stickyRef }) => {
+export const Content: React.FC<ContentProps> = ({ contentRef }) => {
   const eventsRef = useRef<HTMLDivElement>(null)
 
   useGSAP(
     () => {
       if (eventsRef.current) {
-        gsap.set('.event-image', {
-          y: 300,
-        })
-
-        gsap.to('.event-image', {
-          scrollTrigger: {
-            trigger: stickyRef.current,
-            start: 'bottom bottom',
-            end: () =>
-              `+=${window.innerHeight + stickyRef.current!.offsetHeight * 0.4}`,
-            scrub: 2,
-            immediateRender: false,
-            invalidateOnRefresh: false,
+        gsap.fromTo(
+          '.event-image',
+          { y: 300 },
+          {
+            scrollTrigger: {
+              trigger: contentRef.current,
+              start: 'top bottom',
+              end: () =>
+                `+=${window.innerHeight + contentRef.current!.offsetHeight * 0.1}`,
+              scrub: 2,
+              immediateRender: false,
+              invalidateOnRefresh: false,
+            },
+            y: 0,
+            ease: 'power3.out',
+            stagger: {
+              each: 0.1,
+            },
           },
-          y: 0,
-          ease: 'power3.inOut',
-          stagger: {
-            each: 0.05,
-          },
-        })
+        )
       }
     },
     { dependencies: [eventsRef], scope: eventsRef },
@@ -53,13 +53,13 @@ export const Content: React.FC<ContentProps> = ({ contentRef, stickyRef }) => {
       ref={contentRef}
       className="absolute top-[100vh] h-[300vh] w-full bg-neutral-900 py-8"
     >
-      <header className="section-header mb-8 flex w-full justify-between px-8">
+      <header className="section-header mb-8 flex w-full items-end justify-between px-8 pt-40">
         <h1 className="text-normal font-humane text-[10vw] font-bold uppercase leading-[100%] text-white">
           Events
         </h1>
-        <p className="w-1/4 text-right text-xs uppercase text-white">
-          Lorem ipsum dolor sit amet consectetur adipisicing elit. Id non eius
-          expedita laboriosam numquam earum!
+        <p className="w-[28ch] text-right text-base uppercase leading-[1.1] text-white">
+          Our virtual events feature the top talent in the design & development
+          space.
         </p>
       </header>
       <div className="h-[46rem]">
