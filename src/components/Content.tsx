@@ -1,10 +1,6 @@
-import { useGSAP } from '@gsap/react'
 import { CaretLeft, CaretRight } from '@phosphor-icons/react'
 import { EmblaOptionsType } from 'embla-carousel'
 import useEmblaCarousel from 'embla-carousel-react'
-import { gsap } from 'gsap'
-import { CustomEase } from 'gsap/all'
-import ScrollTrigger from 'gsap/dist/ScrollTrigger'
 import Image from 'next/image'
 import { RefObject, Suspense, useEffect, useRef, useState } from 'react'
 
@@ -12,6 +8,7 @@ import dummy1 from '/public/1.jpg'
 import dummy2 from '/public/2.png'
 import dummy3 from '/public/3.jpg'
 import dummy4 from '/public/4.jpg'
+import { CustomEase, gsap, useGSAP } from '@/lib/gsap'
 
 import { Portal } from './Portal'
 
@@ -19,9 +16,6 @@ interface ContentProps {
   contentRef: RefObject<HTMLDivElement>
   stickyRef: RefObject<HTMLDivElement>
 }
-
-gsap.registerPlugin(useGSAP)
-gsap.registerPlugin(ScrollTrigger)
 
 const OPTIONS: EmblaOptionsType = { dragFree: true, duration: 30 }
 
