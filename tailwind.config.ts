@@ -26,6 +26,8 @@ const config: Config = {
         'rotate-eyes': 'rotateEyes 10s infinite linear',
         'wonder-face':
           'wonderFace 3s infinite cubic-bezier(0.075, 0.82, 0.165, 1)',
+        'wonder-face-sm':
+          'wonderFaceSm 3s infinite cubic-bezier(0.075, 0.82, 0.165, 1)',
       },
       keyframes: {
         rotateEyes: {
@@ -48,6 +50,20 @@ const config: Config = {
           '100%': {
             height: '40px',
             width: '40px',
+          },
+        },
+        wonderFaceSm: {
+          '0%': {
+            height: '25px',
+            width: '25px',
+          },
+          '50%': {
+            height: '50px',
+            width: '35px',
+          },
+          '100%': {
+            height: '25px',
+            width: '25px',
           },
         },
       },

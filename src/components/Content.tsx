@@ -8,6 +8,7 @@ import dummy1 from '/public/1.jpg'
 import dummy2 from '/public/2.png'
 import dummy3 from '/public/3.jpg'
 import dummy4 from '/public/4.jpg'
+import { useMediaQuery } from '@/hooks'
 import { CustomEase, gsap, useGSAP } from '@/lib/gsap'
 
 import { Portal } from './Portal'
@@ -20,6 +21,7 @@ interface ContentProps {
 const OPTIONS: EmblaOptionsType = { dragFree: true, duration: 30 }
 
 export const Content: React.FC<ContentProps> = ({ contentRef }) => {
+  const isLarge = useMediaQuery('(min-width: 990px)')
   const [emblaRef] = useEmblaCarousel(OPTIONS)
   const [isClient, setIsClient] = useState(false)
 
@@ -71,7 +73,7 @@ export const Content: React.FC<ContentProps> = ({ contentRef }) => {
 
   useGSAP(
     () => {
-      if (eventsRef.current) {
+      if (eventsRef.current && isLarge) {
         gsap.fromTo(
           '.event-image',
           { y: 300 },
@@ -94,7 +96,7 @@ export const Content: React.FC<ContentProps> = ({ contentRef }) => {
         )
       }
     },
-    { dependencies: [eventsRef], scope: eventsRef },
+    { dependencies: [eventsRef, isLarge], scope: eventsRef },
   )
   useEffect(() => {
     setIsClient(true)
@@ -106,13 +108,13 @@ export const Content: React.FC<ContentProps> = ({ contentRef }) => {
     <>
       <section
         ref={contentRef}
-        className="absolute top-[100vh] h-[300vh] w-full bg-neutral-900 py-8"
+        className="absolute top-[100vh] h-[300vh] w-full bg-neutral-900"
       >
-        <header className="section-header mb-8 flex w-full items-end justify-between px-8 pt-40">
-          <h1 className="text-normal font-humane text-[10vw] font-bold uppercase leading-[100%] text-white">
+        <header className="section-header flex w-full flex-col items-center gap-8 px-8 py-20 lg:flex-row lg:items-end lg:justify-between lg:gap-0 lg:py-8 lg:pt-40">
+          <h2 className="text-normal pt-4 text-center font-humane text-8xl font-bold uppercase leading-[0.8] text-white lg:text-left lg:text-[10vw] lg:leading-[1]">
             Events
-          </h1>
-          <p className="w-[28ch] text-right text-base uppercase leading-[1.1] text-white">
+          </h2>
+          <p className="w-[28ch] text-center text-base uppercase leading-[1.1] text-white lg:text-right">
             Our virtual events feature the top talent in the design &
             development space.
           </p>
@@ -134,7 +136,7 @@ export const Content: React.FC<ContentProps> = ({ contentRef }) => {
 
         <div
           ref={emblaRef}
-          className="relative h-[48rem] w-full cursor-grab"
+          className="relative h-[48rem] w-full cursor-grab overflow-x-hidden"
           onMouseEnter={handleSliderEnter}
           onMouseLeave={handleSliderLeave}
         >

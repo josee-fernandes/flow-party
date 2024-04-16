@@ -8,17 +8,20 @@ import { Content } from '@/components/Content'
 import { Intro } from '@/components/Intro'
 import { Nav } from '@/components/Nav'
 import { Sticky } from '@/components/Sticky'
+import { useMediaQuery } from '@/hooks'
 
 gsap.registerPlugin(useGSAP)
 gsap.registerPlugin(ScrollTrigger)
 
 function Home() {
+  const isLarge = useMediaQuery('(min-width: 990px)')
+
   const stickyRef = useRef<HTMLDivElement>(null)
   const contentRef = useRef<HTMLDivElement>(null)
 
   useGSAP(
     () => {
-      if (!!stickyRef.current && !!contentRef.current) {
+      if (!!stickyRef.current && !!contentRef.current && isLarge) {
         gsap.fromTo(
           stickyRef.current,
           {
@@ -45,11 +48,11 @@ function Home() {
         )
       }
     },
-    { dependencies: [stickyRef, contentRef], scope: stickyRef },
+    { dependencies: [stickyRef, contentRef, isLarge], scope: stickyRef },
   )
   useGSAP(
     () => {
-      if (!!stickyRef.current && !!contentRef.current) {
+      if (!!stickyRef.current && !!contentRef.current && isLarge) {
         gsap.fromTo(
           contentRef.current,
           {
@@ -75,7 +78,7 @@ function Home() {
         )
       }
     },
-    { dependencies: [stickyRef, contentRef], scope: contentRef },
+    { dependencies: [stickyRef, contentRef, isLarge], scope: contentRef },
   )
 
   return (

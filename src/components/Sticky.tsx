@@ -83,26 +83,26 @@ export const Sticky: React.FC<StickyProps> = ({ stickyRef }) => {
       >
         <div
           ref={emojiRef}
-          className="emoji emoji-bg absolute left-1/2 top-1/2 size-[350px] -translate-x-1/2 -translate-y-1/2 overflow-hidden rounded-[100%]"
+          className="emoji emoji-bg absolute left-1/2 top-1/2 size-64 -translate-x-1/2 -translate-y-1/2 overflow-hidden rounded-[100%] lg:size-[350px]"
         >
           <div
             ref={emojiFaceRef}
-            className="emoji-face absolute left-1/2 top-1/2 flex h-[180px] w-[225px] -translate-x-1/2 -translate-y-1/2 flex-col"
+            className="emoji-face absolute left-1/2 top-1/2 flex h-[140px] w-[225px] -translate-x-1/2 -translate-y-1/2 flex-col lg:h-[180px]"
           >
             <div className="eyes flex flex-1 justify-center gap-12">
               <Image
                 src={eye}
                 alt=""
-                className="size-[65px] animate-rotate-eyes object-cover"
+                className="size-[50px] animate-rotate-eyes object-cover lg:size-[65px]"
               />
               <Image
                 src={eye}
                 alt=""
-                className="size-[65px] animate-rotate-eyes object-cover"
+                className="size-[50px] animate-rotate-eyes object-cover lg:size-[65px]"
               />
             </div>
             <div className="mouth-wrapper flex flex-1 items-start justify-center">
-              <div className="mouth size-[40px] animate-wonder-face rounded-[50px] bg-black"></div>
+              <div className="mouth animate-wonder-face-sm size-[25px] rounded-[50px] bg-black lg:size-[40px] lg:animate-wonder-face"></div>
             </div>
           </div>
         </div>
