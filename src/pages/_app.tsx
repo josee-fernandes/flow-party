@@ -1,5 +1,6 @@
 import '@/styles/globals.css'
 
+import { ReactLenis } from '@studio-freight/react-lenis'
 import type { AppProps } from 'next/app'
 import localFont from 'next/font/local'
 
@@ -30,7 +31,11 @@ function App({ Component, pageProps }: AppProps) {
     document.body.className = `h-full w-full overflow-x-hidden bg-black font-swansea ${humane.variable} ${swansea.variable}`
   }, [])
 
-  return <Component {...pageProps} />
+  return (
+    <ReactLenis root>
+      <Component {...pageProps} />
+    </ReactLenis>
+  )
 }
 
 export default App

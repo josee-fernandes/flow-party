@@ -78,9 +78,9 @@ export const Content: React.FC<ContentProps> = ({ contentRef }) => {
           {
             scrollTrigger: {
               trigger: contentRef.current,
-              start: 'top bottom',
+              start: 'clamp(top bottom)',
               end: () =>
-                `+=${window.innerHeight + contentRef.current!.offsetHeight * 0.1}`,
+                `+=${window.innerHeight * 0.45 + contentRef.current!.offsetHeight * 0.2}`,
               scrub: 2,
               immediateRender: false,
               invalidateOnRefresh: false,
@@ -134,7 +134,7 @@ export const Content: React.FC<ContentProps> = ({ contentRef }) => {
 
         <div
           ref={emblaRef}
-          className="relative h-[48rem] w-full cursor-grab overflow-hidden"
+          className="relative h-[48rem] w-full cursor-grab"
           onMouseEnter={handleSliderEnter}
           onMouseLeave={handleSliderLeave}
         >
