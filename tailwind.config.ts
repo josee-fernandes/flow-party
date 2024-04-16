@@ -20,6 +20,7 @@ const config: Config = {
       colors: {
         primary: '#5546ff',
         secondary: '#bfff00',
+        tertiary: '#ff7bca',
       },
       animation: {
         'rotate-eyes': 'rotateEyes 10s infinite linear',

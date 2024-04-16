@@ -5,6 +5,7 @@ import Head from 'next/head'
 import { useRef } from 'react'
 
 import { Content } from '@/components/Content'
+import { Intro } from '@/components/Intro'
 import { Nav } from '@/components/Nav'
 import { Sticky } from '@/components/Sticky'
 
@@ -84,6 +85,7 @@ function Home() {
       </Head>
       <div className="main-container">
         <Nav />
+        <Intro />
         <Sticky stickyRef={stickyRef} contentRef={contentRef} />
         <Content contentRef={contentRef} stickyRef={stickyRef} />
       </div>
