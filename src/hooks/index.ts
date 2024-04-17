@@ -1,4 +1,4 @@
-import { useEffect, useLayoutEffect, useState } from 'react'
+import { useEffect, useLayoutEffect, useMemo, useState } from 'react'
 
 export const useIsomorphicLayoutEffect =
   typeof window !== 'undefined' ? useLayoutEffect : useEffect
@@ -59,4 +59,34 @@ export const useMediaQuery = (
   }, [query])
 
   return matches
+}
+
+export const useBreakpoints = () => {
+  const isExtraSmallScreen = useMediaQuery('(min-width: 480px)')
+  const isSmallScreen = useMediaQuery('(min-width: 640px)')
+  const isMediumScreen = useMediaQuery('(min-width: 768px)')
+  const isLargeScreen = useMediaQuery('(min-width: 990px)')
+  const isExtraLargeScreen = useMediaQuery('(min-width: 1280px)')
+  const is2ExtraLargeScreen = useMediaQuery('(min-width: 1440px)')
+
+  const breakpoints = useMemo(
+    () => ({
+      isExtraSmallScreen,
+      isSmallScreen,
+      isMediumScreen,
+      isLargeScreen,
+      isExtraLargeScreen,
+      is2ExtraLargeScreen,
+    }),
+    [
+      isExtraSmallScreen,
+      isSmallScreen,
+      isMediumScreen,
+      isLargeScreen,
+      isExtraLargeScreen,
+      is2ExtraLargeScreen,
+    ],
+  )
+
+  return breakpoints
 }

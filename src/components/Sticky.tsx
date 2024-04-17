@@ -4,6 +4,7 @@ import Image from 'next/image'
 import { RefObject, useRef } from 'react'
 
 import eye from '/public/eye.svg'
+import { splitToSpan } from '@/utils/gsap'
 
 gsap.registerPlugin(useGSAP)
 
@@ -71,10 +72,13 @@ export const Sticky: React.FC<StickyProps> = ({ stickyRef }) => {
       onMouseMove={handleMove}
       onMouseLeave={handleLeave}
     >
-      <header className="absolute left-1/2 top-[55%] -translate-x-1/2 -translate-y-1/2">
-        <h1 className="pointer-events-none font-humane text-[45vw] font-bold uppercase leading-[70%] text-white">
-          FLOW
-        </h1>
+      <header className="absolute left-1/2 top-[50%] -translate-x-1/2 -translate-y-1/2">
+        {splitToSpan(
+          <h1 className="pointer-events-none hidden overflow-hidden whitespace-nowrap pt-16 font-humane text-[32rem] font-bold uppercase leading-[.7] text-white xs:block md:text-[74vw] lg:text-[40rem] 2xl:text-[48rem]">
+            FLOW
+          </h1>,
+          'flow-char translate-y-[115%]',
+        )}
       </header>
 
       <div
@@ -83,7 +87,7 @@ export const Sticky: React.FC<StickyProps> = ({ stickyRef }) => {
       >
         <div
           ref={emojiRef}
-          className="emoji emoji-bg absolute left-1/2 top-1/2 size-64 -translate-x-1/2 -translate-y-1/2 overflow-hidden rounded-[100%] lg:size-[350px]"
+          className="emoji emoji-bg absolute left-1/2 top-1/2 size-64 -translate-x-1/2 -translate-y-1/2 overflow-hidden rounded-[100%] lg:size-80"
         >
           <div
             ref={emojiFaceRef}

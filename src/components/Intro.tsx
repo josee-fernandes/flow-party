@@ -1,12 +1,13 @@
 import { useEffect, useRef, useState } from 'react'
 
-import { useMediaQuery } from '@/hooks'
+import { useBreakpoints } from '@/hooks'
 import { gsap, useGSAP } from '@/lib/gsap'
 
 import { Portal } from './Portal'
 
 export const Intro: React.FC = () => {
-  const isLargeScreen = useMediaQuery('(min-width: 990px)')
+  const { isExtraSmallScreen, isSmallScreen, isMediumScreen, isLargeScreen } =
+    useBreakpoints()
 
   const [isClient, setIsClient] = useState(false)
 
@@ -33,7 +34,17 @@ export const Intro: React.FC = () => {
         )
       }
     },
-    { dependencies: [isClient, introRef, isLargeScreen], scope: introRef },
+    {
+      dependencies: [
+        isClient,
+        introRef,
+        isExtraSmallScreen,
+        isSmallScreen,
+        isMediumScreen,
+        isLargeScreen,
+      ],
+      scope: introRef,
+    },
   )
 
   return (

@@ -10,6 +10,7 @@ import dummy3 from '/public/3.jpg'
 import dummy4 from '/public/4.jpg'
 import { useMediaQuery } from '@/hooks'
 import { CustomEase, gsap, useGSAP } from '@/lib/gsap'
+import { splitToSpan } from '@/utils/gsap'
 
 import { Portal } from './Portal'
 
@@ -104,6 +105,7 @@ export const Content: React.FC<ContentProps> = ({ contentRef }) => {
 
     return () => window.removeEventListener('mousemove', handleDragMouseCursor)
   }, [dragCursorRef])
+
   return (
     <>
       <section
@@ -111,9 +113,12 @@ export const Content: React.FC<ContentProps> = ({ contentRef }) => {
         className="absolute top-[100vh] h-[300vh] w-full bg-neutral-900"
       >
         <header className="section-header flex w-full flex-col items-center gap-8 px-8 py-20 lg:flex-row lg:items-end lg:justify-between lg:gap-0 lg:py-8 lg:pt-40">
-          <h2 className="text-normal pt-4 text-center font-humane text-8xl font-bold uppercase leading-[0.8] text-white lg:text-left lg:text-[10vw] lg:leading-[1]">
-            Events
-          </h2>
+          {splitToSpan(
+            <h2 className="text-normal overflow-hidden pt-4 text-center font-humane text-8xl font-bold uppercase leading-[0.8] text-white lg:text-left lg:text-[10vw] lg:leading-[1]">
+              Events
+            </h2>,
+            'event-char translate-y-[115%]',
+          )}
           <p className="w-[28ch] text-center text-base uppercase leading-[1.1] text-white lg:text-right">
             Our virtual events feature the top talent in the design &
             development space.
