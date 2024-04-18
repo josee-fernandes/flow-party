@@ -83,16 +83,14 @@ export const Content: React.FC<ContentProps> = ({ contentRef }) => {
               trigger: contentRef.current,
               start: 'clamp(top bottom)',
               end: () =>
-                `+=${window.innerHeight * 0.45 + contentRef.current!.offsetHeight * 0.2}`,
-              scrub: 2,
+                `+=${window.innerHeight + contentRef.current!.offsetHeight * 0.01}`,
+              scrub: 1,
               immediateRender: false,
               invalidateOnRefresh: false,
             },
             y: 0,
             ease: 'power3.out',
-            stagger: {
-              each: 0.1,
-            },
+            stagger: 0.1,
           },
         )
       }

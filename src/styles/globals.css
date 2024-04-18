@@ -2,26 +2,6 @@
 @tailwind components;
 @tailwind utilities;
 
-/* @font-face {
-  font-family: "Humane";
-  src:
-    local("Humane"),
-    url("/public/Humane.ttf") format("truetype");
-}
-@font-face {
-  font-family: "Humane";
-  src:
-    local("Humane Bold"),
-    url("/public/Humane_Bold.ttf") format("truetype");
-  font-weight: 700;
-}
-@font-face {
-  font-family: "Swansea";
-  src:
-    local("Swansea"),
-    url("/public/Swansea.ttf") format("truetype");
-} */
-
 .emoji-bg {
   background:
     url("/sphere.webp") no-repeat 50% 50%,
@@ -29,11 +9,19 @@
   background-size: cover;
 }
 
-html,
+html {
+  -ms-text-size-adjust: 100%;
+  -webkit-text-size-adjust: 100%;
+  text-size-adjust: 100%;
+}
+
 body {
   -ms-overflow-style: none; /* IE and Edge */
   scrollbar-width: none; /* Firefox */
   -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  text-shadow: 1px 1px 1px rgba(0, 0, 0, 0.004);
+  text-rendering: optimizeLegibility !important;
 }
 
 ::-webkit-scrollbar {

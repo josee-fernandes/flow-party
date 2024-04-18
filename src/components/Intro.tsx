@@ -22,9 +22,7 @@ export const Intro: React.FC = () => {
       if (isClient && introRef?.current) {
         gsap.fromTo(
           '.intro-item',
-          {
-            y: 0,
-          },
+          { y: 0 },
           {
             y: '-100%',
             duration: 1,

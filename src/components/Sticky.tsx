@@ -1,12 +1,9 @@
-import { useGSAP } from '@gsap/react'
-import { gsap } from 'gsap'
 import Image from 'next/image'
 import { RefObject, useRef } from 'react'
 
 import eye from '/public/eye.svg'
+import { gsap, useGSAP } from '@/lib/gsap'
 import { splitToSpan } from '@/utils/gsap'
-
-gsap.registerPlugin(useGSAP)
 
 interface StickyProps {
   stickyRef: RefObject<HTMLDivElement>
@@ -65,6 +62,10 @@ export const Sticky: React.FC<StickyProps> = ({ stickyRef }) => {
     })
   })
 
+  useGSAP(() => {
+    gsap.set(emojiRef.current, { display: 'block' })
+  })
+
   return (
     <section
       ref={stickyRef}
@@ -87,7 +88,7 @@ export const Sticky: React.FC<StickyProps> = ({ stickyRef }) => {
       >
         <div
           ref={emojiRef}
-          className="emoji emoji-bg absolute left-1/2 top-1/2 size-64 -translate-x-1/2 -translate-y-1/2 overflow-hidden rounded-[100%] lg:size-80"
+          className="emoji emoji-bg absolute left-1/2 top-1/2 hidden size-64 -translate-x-1/2 -translate-y-1/2 scale-0 overflow-hidden rounded-[100%] lg:size-80"
         >
           <div
             ref={emojiFaceRef}

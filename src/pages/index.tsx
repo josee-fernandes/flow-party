@@ -14,6 +14,10 @@ function Home() {
     useBreakpoints()
 
   const [positions, setPositions] = useState<number[]>([])
+  const [stickySectionTitleAnimation, setStickySectionTitleAnimation] =
+    useState<gsap.core.Tween | null>(null)
+  const [emojiEnterAnimation, setEmojiEnterAnimation] =
+    useState<gsap.core.Tween | null>(null)
 
   const stickyRef = useRef<HTMLDivElement>(null)
   const contentRef = useRef<HTMLDivElement>(null)
@@ -25,8 +29,9 @@ function Home() {
     gsap.fromTo(
       stickyRef.current,
       {
-        y: 0.5,
+        y: 0.0,
         scale: 1,
+        willChange: 'transform',
         rotation: 0,
       },
       {
@@ -34,16 +39,18 @@ function Home() {
           trigger: stickyRef.current,
           start: 'top top',
           end: () =>
-            `+=${window.innerHeight + contentRef.current!.offsetHeight * 0.5}`,
-          scrub: 1.5,
+            `+=${window.innerHeight + contentRef.current!.offsetHeight * 0.1}`,
+          scrub: 1,
           pin: true,
           immediateRender: false,
           invalidateOnRefresh: true,
         },
-        y: 250,
-        scale: 0.7,
-        rotation: -10,
+
+        y: '10%',
+        scale: 0.8,
+        rotationZ: -5,
         ease: 'power3.inOut',
+        transformStyle: 'preserve-3d',
       },
     )
   })
@@ -51,16 +58,16 @@ function Home() {
     gsap.fromTo(
       contentRef.current,
       {
-        scale: 0.75,
-        rotation: 5,
+        scale: 0.7,
+        rotation: 10,
       },
       {
         scrollTrigger: {
           trigger: contentRef.current,
           start: 'top bottom',
           end: () =>
-            `+=${window.innerHeight + stickyRef.current!.offsetHeight * 0.5}`,
-          scrub: 1.5,
+            `+=${window.innerHeight + stickyRef.current!.offsetHeight * 0.07}`,
+          scrub: 1,
           immediateRender: false,
           invalidateOnRefresh: true,
         },
@@ -95,15 +102,10 @@ function Home() {
   })
 
   /* No ScrollTrigger */
-  const stickySectionTitleAnimation = contextSafe(() => {
-    gsap.set('.flow-char', {
-      y: '115%',
-    })
-    gsap.fromTo(
+  const createStickySectionTitleAnimation = contextSafe(() => {
+    const animation = gsap.fromTo(
       '.flow-char',
-      {
-        y: '100%',
-      },
+      { y: '115%' },
       {
         y: 0,
         stagger: 0.1,
@@ -113,20 +115,33 @@ function Home() {
         delay: 0.7,
       },
     )
+
+    if (!stickySectionTitleAnimation) {
+      setStickySectionTitleAnimation(animation)
+    }
   })
-  const emojiEnterAnimation = contextSafe(() => {
-    gsap.fromTo(
+  const createEmojiEnterAnimation = contextSafe(() => {
+    if (emojiEnterAnimation) {
+      emojiEnterAnimation.kill()
+    }
+
+    const animation = gsap.fromTo(
       '.emoji',
-      {
-        scale: 0,
-      },
+      { scale: 0 },
       {
         scale: 1,
         duration: 1,
         ease: 'back',
         delay: 1.7,
+        onComplete: () => {
+          setEmojiEnterAnimation(null)
+        },
       },
     )
+
+    if (!emojiEnterAnimation) {
+      setEmojiEnterAnimation(animation)
+    }
   })
   const resetSectionsAnimations = contextSafe(() => {
     gsap.set([contentRef.current, stickyRef.current], { clearProps: true })
@@ -160,8 +175,13 @@ function Home() {
   useGSAP(
     () => {
       if (stickyRef.current) {
-        stickySectionTitleAnimation()
-        emojiEnterAnimation()
+        if (!stickySectionTitleAnimation) {
+          createStickySectionTitleAnimation()
+        } else {
+          stickySectionTitleAnimation.restart(true)
+        }
+
+        createEmojiEnterAnimation()
       }
     },
     {
@@ -201,8 +221,8 @@ function Home() {
         <title>Flow</title>
       </Head>
       <div className="main-container">
-        <Nav />
         <Intro />
+        <Nav />
         <Sticky stickyRef={stickyRef} contentRef={contentRef} />
         <Content contentRef={contentRef} stickyRef={stickyRef} />
       </div>
