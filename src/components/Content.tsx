@@ -8,7 +8,7 @@ import dummy1 from '/public/1.jpg'
 import dummy2 from '/public/2.png'
 import dummy3 from '/public/3.jpg'
 import dummy4 from '/public/4.jpg'
-import { useMediaQuery } from '@/hooks'
+import { useBreakpoints } from '@/hooks'
 import { CustomEase, gsap, useGSAP } from '@/lib/gsap'
 import { splitToSpan } from '@/utils/gsap'
 
@@ -22,7 +22,7 @@ interface ContentProps {
 const OPTIONS: EmblaOptionsType = { dragFree: true, duration: 30 }
 
 export const Content: React.FC<ContentProps> = ({ contentRef }) => {
-  const isLarge = useMediaQuery('(min-width: 990px)')
+  const { isLargeScreen } = useBreakpoints()
   const [emblaRef] = useEmblaCarousel(OPTIONS)
   const [isClient, setIsClient] = useState(false)
 
@@ -30,6 +30,7 @@ export const Content: React.FC<ContentProps> = ({ contentRef }) => {
   const dragCursorRef = useRef<HTMLDivElement>(null)
 
   const { contextSafe } = useGSAP()
+
   const handleDragMouseCursor = (event: MouseEvent) => {
     const posX = event.pageX
     const posY = event.pageY
@@ -74,20 +75,36 @@ export const Content: React.FC<ContentProps> = ({ contentRef }) => {
 
   useGSAP(
     () => {
-      if (eventsRef.current && isLarge) {
+      if (eventsRef.current && isLargeScreen) {
+        gsap.fromTo(
+          eventsRef.current,
+          { y: 1000 },
+          {
+            scrollTrigger: {
+              trigger: contentRef.current,
+              start: 'top bottom',
+              end: () =>
+                `+=${window.innerHeight + contentRef.current!.offsetHeight * 0.01}`,
+              scrub: 2,
+              onEnter: () => gsap.set('.event-image', { y: 300 }),
+            },
+            y: 0,
+            ease: 'power3.out',
+          },
+        )
+
         gsap.fromTo(
           '.event-image',
           { y: 300 },
           {
             scrollTrigger: {
               trigger: contentRef.current,
-              start: 'clamp(top bottom)',
+              start: 'top bottom',
               end: () =>
                 `+=${window.innerHeight + contentRef.current!.offsetHeight * 0.01}`,
               scrub: 1,
-              immediateRender: false,
-              invalidateOnRefresh: false,
             },
+            invalidateOnRefresh: false,
             y: 0,
             ease: 'power3.out',
             stagger: 0.1,
@@ -95,7 +112,7 @@ export const Content: React.FC<ContentProps> = ({ contentRef }) => {
         )
       }
     },
-    { dependencies: [eventsRef, isLarge], scope: eventsRef },
+    { dependencies: [eventsRef, isLargeScreen], scope: eventsRef },
   )
   useEffect(() => {
     setIsClient(true)
@@ -147,7 +164,7 @@ export const Content: React.FC<ContentProps> = ({ contentRef }) => {
             ref={eventsRef}
             className="events my-0 inline-block h-full whitespace-nowrap"
           >
-            <div className="event-image inline-block h-full w-[90%] overflow-hidden lg:w-[30%]">
+            <div className="event-image inline-block h-full w-[90%] overflow-hidden  lg:w-[30%]">
               <Image
                 src={dummy1}
                 alt=""
