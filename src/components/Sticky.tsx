@@ -3,12 +3,17 @@ import { RefObject, useRef } from 'react'
 
 import eye from '/public/eye.svg'
 import { gsap, useGSAP } from '@/lib/gsap'
+import { rgbColorByPercentage } from '@/utils/color'
 import { splitToSpan } from '@/utils/gsap'
 
 interface StickyProps {
   stickyRef: RefObject<HTMLDivElement>
   contentRef: RefObject<HTMLDivElement>
 }
+
+const LEFT_END_COLOR = 'rgb(255, 123, 202)'
+const START_COLOR = 'rgb(85, 70, 255)'
+const RIGHT_END_COLOR = 'rgb(191, 255, 0)'
 
 export const Sticky: React.FC<StickyProps> = ({ stickyRef }) => {
   const trackerRef = useRef<HTMLDivElement>(null)
@@ -17,12 +22,72 @@ export const Sticky: React.FC<StickyProps> = ({ stickyRef }) => {
 
   const { contextSafe } = useGSAP()
 
+  const handleEmojiColor = (
+    event: React.MouseEvent<HTMLElement, MouseEvent>,
+    trackerRect: DOMRect,
+  ) => {
+    if (!emojiRef.current) return
+
+    const cursorPositionX = event.clientX
+
+    // const endLeftX = 0
+    const startLefX =
+      trackerRect.width - trackerRect.width / 2 - trackerRect.left
+
+    const startRightX = trackerRect.width
+    // const endRightX = trackerRect.width + trackerRect.left
+
+    if (cursorPositionX > startRightX) {
+      // const cursorXPercentage = (100 * cursorPositionX) / startRightX - 100
+      const cursorXPercentage = Math.min(
+        Math.abs(((100 * cursorPositionX) / startLefX - 300) * 4),
+        100,
+      )
+      const colorString = rgbColorByPercentage({
+        start: START_COLOR,
+        end: RIGHT_END_COLOR,
+        percentage: cursorXPercentage,
+      })
+
+      gsap.to(emojiRef.current, {
+        backgroundColor: colorString,
+        ease: 'power3.out',
+        duration: 0.8,
+      })
+    } else if (cursorPositionX < startLefX) {
+      const cursorXPercentage = Math.min(
+        Math.abs(((100 * cursorPositionX) / startLefX - 100) * 4),
+        100,
+      )
+
+      const colorString = rgbColorByPercentage({
+        start: START_COLOR,
+        end: LEFT_END_COLOR,
+        percentage: cursorXPercentage,
+      })
+
+      gsap.to(emojiRef.current, {
+        backgroundColor: colorString,
+        ease: 'power3.out',
+        duration: 0.8,
+      })
+    } else {
+      gsap.to(emojiRef.current, {
+        backgroundColor: START_COLOR,
+        ease: 'power3.out',
+        duration: 0.8,
+      })
+    }
+  }
+
   const handleMove = contextSafe(
     (event: React.MouseEvent<HTMLElement, MouseEvent>) => {
       if (trackerRef.current) {
         const trackerRect = trackerRef.current.getBoundingClientRect()
         const relX = event.clientX - (trackerRect.left + trackerRect.width / 2)
         const relY = event.clientY - (trackerRect.top + trackerRect.height / 2)
+
+        handleEmojiColor(event, trackerRect)
 
         const emojiMaxDisplacement = 100
         const emojiFaceMaxDisplacement = 140
@@ -40,14 +105,14 @@ export const Sticky: React.FC<StickyProps> = ({ stickyRef }) => {
           x: emojiDisplacementX,
           y: emojiDisplacementY,
           ease: 'power3.out',
-          duration: 0.35,
+          duration: 0.8,
         })
 
         gsap.to(emojiFaceRef.current, {
           x: emojiFaceDisplacementX,
           y: emojiFaceDisplacementY,
           ease: 'power3.out',
-          duration: 0.35,
+          duration: 0.8,
         })
       }
     },
@@ -57,6 +122,11 @@ export const Sticky: React.FC<StickyProps> = ({ stickyRef }) => {
     gsap.to([emojiRef.current, emojiFaceRef.current], {
       x: 0,
       y: 0,
+      ease: 'power3.out',
+      duration: 1,
+    })
+    gsap.to(emojiRef.current, {
+      backgroundColor: START_COLOR,
       ease: 'power3.out',
       duration: 1,
     })
@@ -92,7 +162,7 @@ export const Sticky: React.FC<StickyProps> = ({ stickyRef }) => {
         >
           <div
             ref={emojiFaceRef}
-            className="emoji-face absolute left-1/2 top-1/2 flex h-[140px] w-[225px] -translate-x-1/2 -translate-y-1/2 flex-col lg:h-[180px]"
+            className="emoji-face absolute left-1/2 top-1/2 z-[1] flex h-[140px] w-[225px] -translate-x-1/2 -translate-y-1/2 flex-col lg:h-[180px]"
           >
             <div className="eyes flex flex-1 justify-center gap-12">
               <Image

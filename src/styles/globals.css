@@ -3,9 +3,8 @@
 @tailwind utilities;
 
 .emoji-bg {
-  background:
-    url("/sphere.webp") no-repeat 50% 50%,
-    rgb(85, 70, 255);
+  background: url("/sphere.webp") no-repeat 50% 50%;
+  background-color: rgb(85, 70, 255);
   background-size: cover;
 }
 
